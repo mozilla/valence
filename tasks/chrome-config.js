@@ -16,16 +16,11 @@ module.exports = function(grunt) {
     helpers.promptBrowser("chrome", "Chrome", CHROME_SEARCH_PATHS, this.async());
   });
 
-  grunt.registerTask("chrome-site-config", function() {
+  grunt.registerTask("merge-chrome-config", function() {
     var cfg = grunt.config.get("siteConfig");
-    if (!("chromeEnabled" in cfg)) {
-      // Run the chrome configuration task then come back.
-      grunt.task.run(["config-chrome", "chrome-site-config"]);
-      return;
-    }
     if (cfg.chromeEnabled) {
       grunt.config.merge({
-        webdriver: {
+        test: {
           chrome: deepmerge(grunt.config.get("browserTests"), {
             options: {
               desiredCapabilities: {
