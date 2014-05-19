@@ -5,12 +5,12 @@ var deepmerge = require("deepmerge");
 
 
 // Should grab the search list from addon-sdk
-const FIREFOX_SEARCH_PATHS = {
-  "/Applications/Firefox.app/Contents/MacOS/firefox": "firefox",
-  "/Applications/FirefoxBeta.app/Contents/MacOS/firefox": "firefox-beta",
-  "/Applications/FirefoxAurora.app/Contents/MacOS/firefox": "firefox-aurora",
-  "/Applications/FirefoxNightly.app/Contents/MacOS/firefox": "firefox-nightly"
-};
+const FIREFOX_SEARCH_PATHS = [
+  "/Applications/Firefox.app/Contents/MacOS/firefox",
+  "/Applications/FirefoxBeta.app/Contents/MacOS/firefox",
+  "/Applications/FirefoxAurora.app/Contents/MacOS/firefox",
+  "/Applications/FirefoxNightly.app/Contents/MacOS/firefox"
+];
 
 module.exports = function(grunt) {
   var helpers = require("./helpers")(grunt);
@@ -29,11 +29,18 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask("config-firefox", function() {
-    helpers.promptBrowser("firefox", "Firefox", FIREFOX_SEARCH_PATHS, this.async());
+    var done = this.async();
+    helpers.promptPath("nightly", "Nightly", FIREFOX_SEARCH_PATHS.reverse(), function() {
+      helpers.promptBrowser("firefox", "Firefox", FIREFOX_SEARCH_PATHS, done);
+    });
   });
 
   grunt.registerTask("firefox-site-config", function() {
-    var cfg = helpers.readConfig(grunt);
+    var cfg = grunt.config.get("siteConfig");
+    if (!("firefoxEnabled" in cfg)) {
+      grunt.task.run(["config-firefox", "firefox-site-config"]);
+      return;
+    }
     if (cfg.firefoxEnabled) {
       grunt.config.merge({
         webdriver: {
@@ -51,3 +58,4 @@ module.exports = function(grunt) {
   });
   grunt.registerTask("merge-site-config", ["firefox-site-config"]);
 };
+

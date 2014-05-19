@@ -4,10 +4,10 @@
 var fs = require("fs");
 var deepmerge = require("deepmerge");
 
-const CHROME_SEARCH_PATHS = {
-  "/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary": "chrome-canary",
-  "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome": "chrome"
-};
+const CHROME_SEARCH_PATHS = [
+  "/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary",
+  "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+];
 
 module.exports = function(grunt) {
   var helpers = require("./helpers")(grunt);
@@ -17,7 +17,12 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask("chrome-site-config", function() {
-    var cfg = helpers.readConfig(grunt);
+    var cfg = grunt.config.get("siteConfig");
+    if (!("chromeEnabled" in cfg)) {
+      // Run the chrome configuration task then come back.
+      grunt.task.run(["config-chrome", "chrome-site-config"]);
+      return;
+    }
     if (cfg.chromeEnabled) {
       grunt.config.merge({
         webdriver: {

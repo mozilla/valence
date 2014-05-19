@@ -18,21 +18,45 @@ module.exports = function(grunt) {
       grunt.file.write(CONFIG_FILE, JSON.stringify(config, null, 2));
     },
     setConfig: function(prop, value) {
-      var cfg = this.readConfig();
-      cfg[prop] = value;
-      this.writeConfig(cfg);
+      grunt.config.set("siteConfig." + prop, value);
     },
 
-    promptBrowser: function(id, name, possiblePaths, done) {
-      var existingPaths = Object.keys(possiblePaths).filter(fs.existsSync);
+    promptPath: function(id, name, possiblePaths, done) {
+      var existingPaths = possiblePaths.filter(fs.existsSync);
 
       prompt.start();
       prompt.message = "";
       prompt.delimiter = "";
 
       prompt.get({
+        name: "path",
+        description: "Path to " + name + ": ",
+        type: "string",
+        default: existingPaths[0],
+        message: "Path does not exist.",
+        conform: function(value) {
+          if (fs.existsSync(value)) {
+            return true;
+          }
+          return false;
+        }
+      }, function(err, result) {
+        if (result.path) {
+          this.setConfig(id + "Enabled", true);
+          this.setConfig(id + "Path", result.path);
+        }
+        done();
+      }.bind(this));
+    },
+
+    promptBrowser: function(id, name, possiblePaths, done) {
+      prompt.start();
+      prompt.message = "";
+      prompt.delimiter = "";
+
+      prompt.get({
         name: "enable",
-        message: "Enable " + name + "?",
+        message: "Test on " + name + "?",
         validator: /y[es]*|n[o]?/,
         warning: 'Must respond yes or no',
         default: 'yes'
@@ -43,25 +67,7 @@ module.exports = function(grunt) {
           return;
         }
 
-        prompt.get({
-          name: "path",
-          description: "Path to " + name + ": ",
-          type: "string",
-          default: existingPaths[0],
-          message: "Path does not exist.",
-          conform: function(value) {
-            if (fs.existsSync(value)) {
-              return true;
-            }
-            return false;
-          }
-        }, function(err, result) {
-          if (result.path) {
-            this.setConfig(id + "Enabled", true);
-            this.setConfig(id + "Path", result.path);
-          }
-          done();
-        }.bind(this));
+        this.promptPath(id, name, possiblePaths, done);
       }.bind(this));
     }
   };
