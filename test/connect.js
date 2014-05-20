@@ -5,14 +5,13 @@ var assert = require('assert');
 var volcan = require("volcan");
 var Port = require("volcan/port");
 
+var helpers = require('./lib/test-helpers');
+
 // This is just a temp test while I set up the thing.
-describe('grunt-webdriverjs test', function () {
-    it('checks if we can connect to a debugger server', function(done) {
-        var port = new Port.Port(9223, "localhost");
-        volcan.connect(port).then(function(root) {
-            return root.echo("hello");
-        }).then(function(greeting) {
-            assert(greeting === "hello");
-        }).then(done);
-    });
+describe('connect tab test', function () {
+  it('checks if we can load and connect to a tab', function(done) {
+    helpers.connectTab(browser, "http://localhost:8910/traversal.html").then(function(items) {
+      assert(items.tab.url, "http://localhost:8910/traversal.html");
+    }).then(done);
+  });
 });
