@@ -16,8 +16,10 @@
     "grunt-webdriver": "^0.4.0",
     "mocha": "^1.18.2",
     "prompt": "^0.2.12",
+    "request": "^2.36.0",
     "selenium-standalone": "^2.41.0-2.9.0",
     "volcan": "",
-    "webdriverjs": "^1.7.0"
+    "webdriverjs": "^1.7.0",
+    "ws": "^0.4.31"
   }
 }
