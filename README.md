@@ -16,7 +16,6 @@ Chrome
 * Navigate to the page you want to look at - I don't have navigation working yet.
 * "cfx run"
   - use the -b option to point it at Firefox Nightly if necessary.
-  - as of this writing, you also need to pass -o because of reasons.
 * Press the little button that was added to your toolbar.
 
 Troubleshooting:
