@@ -17,6 +17,26 @@ function store(selector) {
 function putback(parentSelector) {
   document.querySelector(parentSelector).appendChild(savedNode);
 }
+
+function addFront() {
+  var el = document.createElement("div");
+  el.textContent = "ADDED FRONT";
+  var list = document.querySelector("#longlist");
+  list.insertBefore(el, list.firstChild);
+}
+
+function addMiddle() {
+  var el = document.createElement("div");
+  el.textContent = "ADDED MIDDLE";
+  document.querySelector("#longlist").insertBefore(el, document.querySelector("#d"));
+}
+
+function addEnd() {
+  var el = document.createElement("div");
+  el.textContent = "ADDED END";
+  document.querySelector("#longlist").appendChild(el);
+}
+
 </script>
 </head>
 <body style="background-color:white">
@@ -28,7 +48,13 @@ function putback(parentSelector) {
   <a href="#" onclick="store('#longlist')">Take away longlist</a>
   <p>
   <a href="#" onclick="putback('body')">Put it back where it came from.</a>
-
+  <p>
+  <a href="#" onclick="addFront()">Add to the front</a>
+  <p>
+  <a href="#" onclick="addMiddle()">Add before d</a>
+  <p>
+  <a href="#" onclick="addEnd()">Add to the end</a>
+  <p>
   <span id="longstring">longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong</span>
   <span id="shortstring">short</span>
   <span id="empty"></span>
