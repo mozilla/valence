@@ -8,3 +8,15 @@ function debuggerStatement() {
   debugger;
   console.log("Got here!");
 }
+
+function debugDeeply() {
+  console.log("d");
+  console.log("e");
+}
+
+function debugMe() {
+  console.log("a");
+  console.log("b");
+  debugDeeply();
+  console.log("f");
+}
