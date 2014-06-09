@@ -6,13 +6,10 @@ var url = require("url");
 var server = http.createServer(function (req, res) {
   var path = url.parse(req.url).pathname
   console.log("REQUEST: " + path);
-  if (path !== "/json") {
-    return;
-  }
-  request('http://localhost:9223/json', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
+  request('http://localhost:9223' + path, function (error, response, body) {
+    if (!error) {
       body = body.replace(/9223/gi, "9224");
-      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.writeHead(response.statusCode, response.headers);
       res.end(body);
     }
   });

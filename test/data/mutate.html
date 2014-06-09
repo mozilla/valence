@@ -24,6 +24,8 @@ function addFront() {
   var list = document.querySelector("#longlist");
   list.insertBefore(el, list.firstChild);
 }
+</script>
+<script type="text/javascript">
 
 function addMiddle() {
   var el = document.createElement("div");
@@ -37,6 +39,16 @@ function addEnd() {
   document.querySelector("#longlist").appendChild(el);
 }
 
+function evalSomething() {
+  eval("document.queryElement('body').style.backgroundColor = 'green'");
+  var foo = "document.queryElement('body')" + ".style.backgroundColor = " + "#f06";
+  eval(foo);
+}
+
+function debuggerStatement() {
+  debugger;
+  console.log("Got here!");
+}
 </script>
 </head>
 <body style="background-color:white">
@@ -54,6 +66,10 @@ function addEnd() {
   <a href="#" onclick="addMiddle()">Add before d</a>
   <p>
   <a href="#" onclick="addEnd()">Add to the end</a>
+  <p>
+  <a href="#" onclick="evalSomething()">Eval something.</a>
+  <p>
+  <a href="#" onclick="evalSomething()">Debugger statement.</a>
   <p>
   <span id="longstring">longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong</span>
   <span id="shortstring">short</span>
