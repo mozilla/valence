@@ -10,13 +10,13 @@ function debuggerStatement() {
 }
 
 function debugDeeply() {
+  console.log("c");
   console.log("d");
-  console.log("e");
 }
 
 function debugMe() {
   console.log("a");
   console.log("b");
   debugDeeply();
-  console.log("f");
+  console.log("e");
 }
