@@ -2,7 +2,7 @@
   "name": "fxdevtools_adapters",
   "title": "Firefox Developer Tools Adapters",
   "id": "fxdevtools-adapters@mozilla.org",
-  "description": "Protocl Adapters for Firefox Developer Tools",
+  "description": "Protocol Adapters for Firefox Developer Tools",
   "author": "Dave Camp",
   "license": "MPL 2.0",
   "version": "0.0.1",
