@@ -10,12 +10,12 @@ a sample addon Jeff Griffiths did.  I don't know where he got the icon.
 Chrome
 ------
 
-* Get the addon-sdk and activate it
-* Get FirefoxNightly and make sure addon-sdk is using it.
+* Install jpm
+-   npm install -g jpm
 * Start a recent Canary build with --remote-debugging-port=9222
 * Navigate to the page you want to look at - I don't have navigation working yet.
-* "cfx run"
-  - use the -b option to point it at Firefox Nightly if necessary.
+* "jpm run -v"
+  - use the -b option to point it at a recent Firefox Nightly if necessary.
 * Press the little button that was added to your toolbar.
 
 Troubleshooting:
@@ -28,20 +28,17 @@ spew will help.
 Chrome on Android
 -----------------
 
-This is even more broken than chrome desktop right now.
-
+* This currently only works on Chrome Beta on android (see [1]).
 * Same as above, but also turn on debugging and set up adb as described in
-https://developer.chrome.com/devtools/docs/remote-debugging-legacy EXCEPT
-use 9223 as your port, not 9222.  Because of reasons.
+https://developer.chrome.com/devtools/docs/remote-debugging-legacy
 
 * It would be nice if we could figure out the new connection stuff chrome uses.
-* run 'npm install' to add some of the extra crap we need for this next step
-* run 'node proxy.js'
-* Run the addon as usual, it should debug your chromium instance now.
-* Read the code for proxy.js and curse my name.  Read [2] for more info.
+* Run the addon as usual, it should debug your chrome instance now.
 
 Safari on iOS
 -------------
+
+Even more broken than Chrome on Android.
 
 * Same as the chrome setup, but install and run ios_webkit_debug_bridge.
 
@@ -56,7 +53,3 @@ Notes
 [1] There was a bug in chrome's websocket implementation that prevented
 Firefox from connecting to it.  They fixed the bug quickly, but you need a
 a recent canary.
-
-[2] Same bug as [1], but the fix hasn't propagated to android yet, so proxy.js
-just acts as a mediator between two websocket implementations that don't quite
-get along.
