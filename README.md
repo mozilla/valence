@@ -1,19 +1,40 @@
-Fever Dream
+Web Anywhere (Fever Dream)
 ===========
 
-This module doesn't work.  But you're curious, so I'm going to give you some
-basic information.  Curiosity is good, it is how we move forward as a people.
+This addon provides the ability for you to debug various remote targets from the Firefox Developer Tools. The idea is that you can use one solid set of developer tools to debug all the things you need. This is the dream, anyhow. We're going to try and make this happen.
 
-This adds a button to your Firefox toolbar.  It's an icon that I took from
-a sample addon Jeff Griffiths did.  I don't know where he got the icon.
+This module sort of works, but it probably won't do all the things you need to do as a web developer - yet.  You're curious though, so here is some basic information to get started.  Curiosity is good, it is how we move forward as a people.
 
-Chrome
-------
+How to Interact With The Thing
+------------------------------
 
-* Install jpm
--   npm install -g jpm
-* Start a recent Canary build with --remote-debugging-port=9222
-* Navigate to the page you want to look at - I don't have navigation working yet.
+There are two ways to interact with this tool right now: a button, or some Developer Toolbar commands. 
+
+Running this stuff will add a (very ambiguous) new icon to your browser. When you click it, it will attempt to connect the Firefox devtools to whatever is on port 9222. For example, if you start an instance of Chrome Canary on port 9222 (use flag --remote-debugging-port=9222), it will try and connect to that.
+
+If you want things to be a bit more automagical, use the commands `chrome`, `android` and `ios` from the Developer Toolbar. These should automatically launch a browser for you and connect appropriately - assuming you've met the installation requirements below.
+
+
+Installation for All Y'all
+------------------
+
+You should have a copy of Firefox Nightly installed, as well as node (and subsequently npm). Then:
+
+1. Make sure you have an updated copy of Firefox Nightly installed. If you need to install Nightly, you can get it [here](http://www.nightlyurl.ok/yeahdude).
+
+2. Make sure you have node (and subsequently npm) installed. Instructions for that are [here](http://url.to.the.thing).
+
+3. Install jpm with `npm install -g jpm`. jpm is a node utility for developing browser add-ons.
+
+4. Follow instructions below for each applicable debug target/browser.
+
+Debugging Chrome on Desktop
+-----------------
+
+Open the developer toolbar and execute the `chrome` command, or if you have Chrome waiting on port 9222, click. If all is well, 
+
+
+3. Use the button to connect to a suitable debug target on port 9222, .
 * "jpm run -v"
   - use the -b option to point it at a recent Firefox Nightly if necessary.
 * Press the little button that was added to your toolbar.
@@ -25,31 +46,34 @@ spew will help.
   - don't have canary running with --remote-debugging-port=9222 or
   - your canary isn't new enough[1]
 
-Chrome on Android
+Debugging Chrome on Android
 -----------------
 
-* This currently only works on Chrome Beta on android (see [1]).
-* Same as above, but also turn on debugging and set up adb as described in
-https://developer.chrome.com/devtools/docs/remote-debugging-legacy
+This currently only works on Chrome Beta on Android. There was a bug in chrome's websocket implementation that prevented Firefox from connecting to it.  They fixed the bug quickly, but you need a recent canary.
+
+In addition to the instuctions for Chrome Desktop above, turn on debugging and set up adb as described in https://developer.chrome.com/devtools/docs/remote-debugging-legacy
 
 * It would be nice if we could figure out the new connection stuff chrome uses.
-* Run the addon as usual, it should debug your chrome instance now.
 
-Safari on iOS
+Deebugging Safari on iOS
 -------------
 
-Even more broken than Chrome on Android.
+Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
 
-* Same as the chrome setup, but install and run ios_webkit_debug_bridge.
+Follow the setup for Chrome Desktop above, but also install and run [ios_webkit_debug_bridge](http://url.to.thing).
+
+Run the debug bridge from the command line with `ios_webkit_debug_bridge`.
 
 Why did you start this project?
 -------------------------------
 
-If I answer that I won't actually get around to checking this file in.
+We realized that debugging individual browsers in their respective vendor silos is painful, frustrating, and at times downright demoralizing. We wanted to make better tools so that web developers are relieved of this anguish. You should test this thing as it becomes more stable, and let us know how we can make cross-platform debugging better.
 
 Notes
 -----
 
-[1] There was a bug in chrome's websocket implementation that prevented
-Firefox from connecting to it.  They fixed the bug quickly, but you need a
-a recent canary.
+Please note that this project should be treated as _ALPHA_ software - implementation is far from finished.
+
+The UI for interacting with this project will change soon - the commands will likely stick around but the ambiguous button in your browser will probably not. Eventually there will even be nicer buttons than any of this. Dare to dream.
+
+If you notice that the install or usage instructions should be different, please help us by sending a PR for this README. This project is changing fast and so information here may be out of date.
