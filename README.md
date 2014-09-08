@@ -10,7 +10,7 @@ How to Interact With The Thing
 
 There are two ways to interact with this tool right now: a button, or some Developer Toolbar commands. 
 
-Running this stuff will add a (very ambiguous) new icon to your browser. When you click it, it will attempt to connect the Firefox devtools to whatever is on port 9222. For example, if you start an instance of Chrome Canary on port 9222 (use flag --remote-debugging-port=9222), it will try and connect to that.
+Running this stuff will add a (weirdly ambiguous) new icon to your browser. When you click it, it will attempt to connect the Firefox devtools to whatever is on port 9222. For example, if you start an instance of Chrome Canary on port 9222 (use flag --remote-debugging-port=9222), it will try and connect to that.
 
 If you want things to be a bit more automagical, use the commands `chrome`, `android` and `ios` from the Developer Toolbar. These should automatically launch a browser for you and connect appropriately - assuming you've met the installation requirements below.
 
@@ -33,18 +33,12 @@ Debugging Chrome on Desktop
 
 Open the developer toolbar and execute the `chrome` command, or if you have Chrome waiting on port 9222, click. If all is well, 
 
-
 3. Use the button to connect to a suitable debug target on port 9222, .
 * "jpm run -v"
   - use the -b option to point it at a recent Firefox Nightly if necessary.
 * Press the little button that was added to your toolbar.
 
-Troubleshooting:
-* If you don't see a new toolbar button, something is broken.  Maybe console
-spew will help.
-* If you click on the toolbar button and nothing happens, you either
-  - don't have canary running with --remote-debugging-port=9222 or
-  - your canary isn't new enough[1]
+If you click on the toolbar button and nothing happens, you either don't have have something running on port 9222, or your canary isn't new enough[1]
 
 Debugging Chrome on Android
 -----------------
