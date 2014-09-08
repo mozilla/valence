@@ -20,9 +20,9 @@ Installation for All Y'all
 
 You should have a copy of Firefox Nightly installed, as well as node (and subsequently npm). Then:
 
-1. Make sure you have an updated copy of Firefox Nightly installed. If you need to install Nightly, you can get it [here](http://www.nightlyurl.ok/yeahdude).
+1. Make sure you have an updated copy of Firefox Nightly installed. If you need to install Nightly, you can get it [here](https://nightly.mozilla.org/).
 
-2. Make sure you have node (and subsequently npm) installed. Instructions for that are [here](http://url.to.the.thing).
+2. Make sure you have node (and subsequently npm) installed. Instructions for that are [here](http://nodejs.org/download/).
 
 3. Install jpm with `npm install -g jpm`. jpm is a node utility for developing browser add-ons.
 
@@ -31,12 +31,11 @@ You should have a copy of Firefox Nightly installed, as well as node (and subseq
 Debugging Chrome on Desktop
 -----------------
 
-Open the developer toolbar and execute the `chrome` command, or if you have Chrome waiting on port 9222, click. If all is well, 
+Use the button to connect to a suitable debug target on port 9222, .
+`jpm run -v"`
+_Note_: use the -b option to point it at a recent Firefox Nightly if necessary.
 
-3. Use the button to connect to a suitable debug target on port 9222, .
-* "jpm run -v"
-  - use the -b option to point it at a recent Firefox Nightly if necessary.
-* Press the little button that was added to your toolbar.
+Open the developer toolbar and execute the `chrome` command, or if you have Chrome waiting on port 9222, click dat buttun.
 
 If you click on the toolbar button and nothing happens, you either don't have have something running on port 9222, or your canary isn't new enough[1]
 
@@ -54,19 +53,19 @@ Deebugging Safari on iOS
 
 Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
 
-Follow the setup for Chrome Desktop above, but also install and run [ios_webkit_debug_bridge](http://url.to.thing).
+Follow the setup for Chrome Desktop above, but also install and run [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).
 
-Run the debug bridge from the command line with `ios_webkit_debug_bridge`.
+Run the debug bridge from the command line with `ios_webkit_debug_proxy`.
 
 Why did you start this project?
 -------------------------------
 
-We realized that debugging individual browsers in their respective vendor silos is painful, frustrating, and at times downright demoralizing. We wanted to make better tools so that web developers are relieved of this anguish. You should test this thing as it becomes more stable, and let us know how we can make cross-platform debugging better.
+We realized that debugging individual browsers in their respective vendor silos is painful, frustrating, and at times downright demoralizing. We wanted to make better tools so that web developers are relieved of this anguish (as much as possible). You should test this thing as it becomes more stable, and let us know how we can make the cross-platform debugging experience better.
 
 Notes
 -----
 
-Please note that this project should be treated as _ALPHA_ software - implementation is far from finished.
+Note that this project should be treated as _ALPHA_ software - implementation is far from finished.
 
 The UI for interacting with this project will change soon - the commands will likely stick around but the ambiguous button in your browser will probably not. Eventually there will even be nicer buttons than any of this. Dare to dream.
 
