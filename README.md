@@ -18,26 +18,35 @@ If you want things to be a bit more automagical, use the commands `chrome`, `and
 Installation for All Y'all
 ------------------
 
-You should have a copy of Firefox Nightly installed, as well as node (and subsequently npm). Then:
+Before you can build and run the extension, here are a few things you'll need to do:
 
-1. Make sure you have an updated copy of Firefox Nightly installed. If you need to install Nightly, you can get it [here](https://nightly.mozilla.org/).
+1. `git clone git@github.com:campd/fxdt-adapters.git`
 
-2. Make sure you have node (and subsequently npm) installed. Instructions for that are [here](http://nodejs.org/download/).
+2. Make sure you have an updated copy of Firefox Nightly installed. If you need to install Nightly, you can get it [here](https://nightly.mozilla.org/).
 
-3. Install jpm with `npm install -g jpm`. jpm is a node utility for developing browser add-ons.
+3. Make sure you have node (and subsequently npm) installed. Instructions for that are [here](http://nodejs.org/download/).
 
-4. Follow instructions below for each applicable debug target/browser.
+4. Install jpm with `npm install -g jpm`. jpm is a node utility for developing browser add-ons.
+
+Then from your extension folder you can use `jpm run -v`, with the`-b` option to use your recent Firefox Nightly, to run a new Firefox process with the extension installed.
+
+Now that you've done that, you can follow the instructions below for each applicable debug target/browser.
+
 
 Debugging Chrome on Desktop
 -----------------
 
-Use the button to connect to a suitable debug target on port 9222, .
-`jpm run -v"`
-_Note_: use the -b option to point it at a recent Firefox Nightly if necessary.
+Clicking the button on the Firefox toolbar will connect to the debug target on port 9222.  To debug Chrome on Desktop, the process must have remote debugging enabled and set to this port.
 
-Open the developer toolbar and execute the `chrome` command, or if you have Chrome waiting on port 9222, click the toolbar button.
+The important flag is `--remote-debugging-port=9222`.  There is a page with information on how to [run the Chrome process with these flags](http://www.chromium.org/developers/how-tos/run-chromium-with-flags).
 
-If you click on the toolbar button and nothing happens, you either don't have have something running on port 9222, or your canary isn't new enough[1]
+There are some other flags that can be helpful if you'd like to run this alongside another Chrome profile.  By running with `--no-first-run`, `--no-default-browser-check`, and `--user-data-dir` you can run this process alongside another Chrome profile.
+
+For example, on OSX, you could run the following command to start a debuggable copy of Chrome:
+
+    > /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')
+
+If you click on the toolbar button and nothing happens, you most likely don't have anything running on port 9222.  Check the [Browser Console](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console) to see what has gone wrong.
 
 Debugging Chrome on Android
 -----------------
