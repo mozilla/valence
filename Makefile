@@ -14,9 +14,12 @@ all: $(XPIS)
 
 define build-xpi
 	echo "build xpi for $1";
-	sed -e 's#@@UPDATE_URL@@#$(UPDATE_URL)$1/update.rdf#;s#@@ADDON_VERSION@@#$(ADDON_VERSION)#' template-install.rdf > install.rdf
+	sed -e 's#@@UPDATE_URL@@#$(UPDATE_URL)$1/update.rdf#;s#@@ADDON_VERSION@@#$(ADDON_VERSION)#' template/install.rdf > install.rdf
 	zip $(XPI_NAME)-$1.xpi -r $2 install.rdf
 endef
+
+bootstrap.js:
+	cp template/bootstrap.js bootstrap.js
 
 $(XPI_NAME)-win32.xpi: $(FILES)
 	@$(call build-xpi,win32, $^)
@@ -32,7 +35,7 @@ $(XPI_NAME)-mac64.xpi: $(FILES)
 
 clean:
 	rm -f *.xpi
-	rm -f update.rdf install.rdf
+	rm -f update.rdf install.rdf bootstrap.js
 
 define release
   echo "releasing $1"
@@ -42,7 +45,7 @@ define release
   # Update the "latest" symbolic link
 	ssh $(SSH_USER)@stage.mozilla.org 'cd $(FTP_ROOT_PATH)/$1/ && ln -fs $(XPI_NAME)-$1.xpi $(ADDON_NAME)-$1-latest.xpi'
   # Update the update manifest
-	sed -e 's#@@UPDATE_LINK@@#$(UPDATE_LINK)$1/$(XPI_NAME)-$1.xpi#;s#@@ADDON_VERSION@@#$(ADDON_VERSION)#' template-update.rdf > update.rdf
+	sed -e 's#@@UPDATE_LINK@@#$(UPDATE_LINK)$1/$(XPI_NAME)-$1.xpi#;s#@@ADDON_VERSION@@#$(ADDON_VERSION)#' template/update.rdf > update.rdf
   chmod 766 update.rdf
 	scp -p update.rdf $(SSH_USER)@stage.mozilla.org:$(FTP_ROOT_PATH)/$1/update.rdf
 endef

@@ -5,6 +5,7 @@ site-config.json
 .grunt
 npm-debug.log
 node_modules
-install.rdf
-update.rdf
+/install.rdf
+/update.rdf
+/bootstrap.js
 .DS_Store
