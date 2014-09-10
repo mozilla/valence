@@ -1,16 +1,16 @@
 Web Anywhere (Fever Dream)
 ===========
 
-This addon provides the ability for you to debug various remote targets from the Firefox Developer Tools. The idea is that you can use one solid set of developer tools to debug all the things you need. This is the dream, anyhow. We're going to try and make this happen.
+This add-on provides the ability for you to debug various remote targets from the Firefox Developer Tools. The idea is that you can use one solid set of developer tools to debug all the things you need. This is the dream, anyhow. We're going to try and make this happen.
 
 This module sort of works, but it probably won't do all the things you need to do as a web developer - yet.  You're curious though, so here is some basic information to get started.  Curiosity is good, it is how we move forward as a people.
 
 How to Interact With The Thing
 ------------------------------
 
-There are two ways to interact with this tool right now: a button, or some Developer Toolbar commands. 
+There are two ways to interact with this tool right now: a button, or some Developer Toolbar commands.
 
-Running this stuff will add a (weirdly ambiguous) new icon to your browser. When you click it, it will attempt to connect the Firefox devtools to whatever is on port 9222. For example, if you start an instance of Chrome Canary on port 9222 (use flag --remote-debugging-port=9222), it will try and connect to that.
+Running this stuff will add a (weirdly ambiguous) new icon to your browser. When you click it, it will attempt to connect the Firefox DevTools to whatever is on port 9222. For example, if you start an instance of Chrome Canary on port 9222 (use flag --remote-debugging-port=9222), it will try and connect to that.
 
 If you want things to be a bit more automagical, use the commands `chrome`, `android` and `ios` from the Developer Toolbar. These should automatically launch a browser for you and connect appropriately - assuming you've met the installation requirements below.
 
@@ -35,7 +35,7 @@ Use the button to connect to a suitable debug target on port 9222, .
 `jpm run -v"`
 _Note_: use the -b option to point it at a recent Firefox Nightly if necessary.
 
-Open the developer toolbar and execute the `chrome` command, or if you have Chrome waiting on port 9222, click dat buttun.
+Open the developer toolbar and execute the `chrome` command, or if you have Chrome waiting on port 9222, click the toolbar button.
 
 If you click on the toolbar button and nothing happens, you either don't have have something running on port 9222, or your canary isn't new enough[1]
 
@@ -44,11 +44,11 @@ Debugging Chrome on Android
 
 This currently only works on Chrome Beta on Android. There was a bug in chrome's websocket implementation that prevented Firefox from connecting to it.  They fixed the bug quickly, but you need a recent canary.
 
-In addition to the instuctions for Chrome Desktop above, turn on debugging and set up adb as described in https://developer.chrome.com/devtools/docs/remote-debugging-legacy
+In addition to the instructions for Chrome Desktop above, turn on debugging and set up adb as described in https://developer.chrome.com/devtools/docs/remote-debugging-legacy
 
 * It would be nice if we could figure out the new connection stuff chrome uses.
 
-Deebugging Safari on iOS
+Debugging Safari on iOS
 -------------
 
 Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
