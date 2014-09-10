@@ -1,5 +1,5 @@
-Web Anywhere (Fever Dream)
-===========
+Firefox Developer Tools Adapter
+===============================
 
 This add-on provides the ability for you to debug various remote targets from the Firefox Developer Tools. The idea is that you can use one solid set of developer tools to debug all the things you need. This is the dream, anyhow. We're going to try and make this happen.
 
