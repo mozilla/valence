@@ -51,20 +51,20 @@ If you click on the toolbar button and nothing happens, you most likely don't ha
 Debugging Chrome on Android
 -----------------
 
-This currently only works on Chrome Beta on Android. There was a bug in chrome's websocket implementation that prevented Firefox from connecting to it.  They fixed the bug quickly, but you need a recent canary.
+In addition to the installation instructions, follow [these instructions](https://developer.chrome.com/devtools/docs/remote-debugging-legacy) to turn on remote debugging and set up adb.
 
-In addition to the instructions for Chrome Desktop above, turn on debugging and set up adb as described in https://developer.chrome.com/devtools/docs/remote-debugging-legacy
-
-* It would be nice if we could figure out the new connection stuff chrome uses.
+* Note: It would be nice if we could figure out the new connection stuff chrome uses.
 
 Debugging Safari on iOS
 -------------
 
-Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
+In addition to the installation instructions, you will need to enable developer support on your device. Follow the instructions on [this page](https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/GettingStarted/GettingStarted.html) (in the "To enable Web Inspector on iOS" section) to get started.  Note: you can also use the iOS simulator if you have Xcode installed.
 
-Follow the setup for Chrome Desktop above, but also install and run [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).
+You will also need to install and run [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).
 
 Run the debug bridge from the command line with `ios_webkit_debug_proxy`.
+
+* Note: Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
 
 Why did you start this project?
 -------------------------------
