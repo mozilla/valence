@@ -53,8 +53,6 @@ Debugging Chrome on Android
 
 In addition to the installation instructions, follow [these instructions](https://developer.chrome.com/devtools/docs/remote-debugging-legacy) to turn on remote debugging and set up adb.
 
-* Note: It would be nice if we could figure out the new connection stuff chrome uses.
-
 Debugging Safari on iOS
 -------------
 
