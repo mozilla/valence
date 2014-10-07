@@ -60,9 +60,7 @@ Debugging Safari on iOS
 
 In addition to the installation instructions, you will need to enable developer support on your device. Follow the instructions on [this page](https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/GettingStarted/GettingStarted.html) (in the "To enable Web Inspector on iOS" section) to get started.  Note: you can also use the iOS simulator if you have Xcode installed.
 
-You will also need to install and run [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).
-
-Run the debug bridge from the command line with `ios_webkit_debug_proxy`.
+If you are on Linux, you will also need to install and run [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).  Run the debug bridge from the command line with `ios_webkit_debug_proxy`.
 
 * Note: Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
 
