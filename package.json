@@ -23,5 +23,11 @@
     "type": "bool",
     "value": false,
     "hidden": true
+  }, {
+    "name": "enableToolbarButton",
+    "title": "Show a button in the toolbar that connects to localhost:9222",
+    "type": "bool",
+    "value": false,
+    "hidden": true
   }]
 }
