@@ -8,11 +8,13 @@ This module sort of works, but it probably won't do all the things you need to d
 How to Interact With The Thing
 ------------------------------
 
-There are two ways to interact with this tool right now: a button, or some Developer Toolbar commands.
+There are three ways to interact with this tool right now: WebIDE, some Developer Toolbar commands, or a toolbar button.
 
-Running this stuff will add a (weirdly ambiguous) new icon to your browser. When you click it, it will attempt to connect the Firefox DevTools to whatever is on port 9222. For example, if you start an instance of Chrome Canary on port 9222 (use flag --remote-debugging-port=9222), it will try and connect to that.
+WebIDE is the main tool for debugging remote devices and this add-on provides additional runtime options in the Custom section for Chrome and iOS. You can learn more about WebIDE in the [Mozilla Developer Network](https://developer.mozilla.org/docs/Tools/WebIDE).
 
-If you want things to be a bit more automagical, use the commands `chrome`, `android` and `ios` from the Developer Toolbar. These should automatically launch a browser for you and connect appropriately - assuming you've met the installation requirements below.
+If you prefer interacting with a command-line tool, use the commands `chrome`, `android` and `ios` from the Developer Toolbar. These should automatically launch a browser for you and connect appropriately - assuming you've met the installation requirements below.
+
+For a quick setup when working on the add-on itself, it will add a (weirdly ambiguous) new icon to your browser, once you set the pref `extensions.fxdevtools-adapters@mozilla.org.enableToolbarButton` to `true`. You can toggle its value from `about:config`, or by adding it in a JSON file with preference overrides that you provide to jpm via the `--prefs` option (check out `jpm --help` for the right syntax). When you click it, it will attempt to connect the Firefox DevTools to whatever is on port 9222. For example, if you start an instance of Chrome Canary on port 9222 (use flag `--remote-debugging-port=9222`), it will try and connect to that.
 
 
 Installation for All Y'all
