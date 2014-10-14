@@ -1,6 +1,6 @@
 FILES=data lib package.json README.md bootstrap.js
 ADDON_NAME=fxdt-adapters
-ADDON_VERSION=0.0.5pre
+ADDON_VERSION=0.0.6pre
 XPI_NAME=$(ADDON_NAME)-$(ADDON_VERSION)
 
 FTP_ROOT_PATH=/pub/mozilla.org/labs/fxdt-adapters
