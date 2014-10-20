@@ -29,7 +29,7 @@ $(XPI_NAME)-win32.xpi: $(FILES)
 $(XPI_NAME)-linux32.xpi: $(FILES)
 	@$(call build-xpi,linux32, $^)
 
-$(XPI_NAME)-linux64.xpi: $(FILES)
+$(XPI_NAME)-linux64.xpi: $(FILES) tools/linux64
 	@$(call build-xpi,linux64, $^)
 
 $(XPI_NAME)-mac64.xpi: $(FILES) tools/mac64
