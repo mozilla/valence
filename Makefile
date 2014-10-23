@@ -20,7 +20,7 @@ define build-xpi
 	mv jpm_install.rdf install.rdf
 endef
 
-bootstrap.js:
+bootstrap.js: template
 	cp template/bootstrap.js bootstrap.js
 
 $(XPI_NAME)-win32.xpi: $(FILES)
