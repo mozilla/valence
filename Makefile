@@ -14,11 +14,13 @@ all: $(XPIS)
 
 define build-xpi
 	echo "build xpi for $1";
+	mv install.rdf jpm_install.rdf
 	sed -e 's#@@UPDATE_URL@@#$(UPDATE_URL)$1/update.rdf#;s#@@ADDON_VERSION@@#$(ADDON_VERSION)#' template/install.rdf > install.rdf
 	zip $(XPI_NAME)-$1.xpi -r $2 install.rdf
+	mv jpm_install.rdf install.rdf
 endef
 
-bootstrap.js:
+bootstrap.js: template
 	cp template/bootstrap.js bootstrap.js
 
 $(XPI_NAME)-win32.xpi: $(FILES)
@@ -27,15 +29,15 @@ $(XPI_NAME)-win32.xpi: $(FILES)
 $(XPI_NAME)-linux32.xpi: $(FILES)
 	@$(call build-xpi,linux32, $^)
 
-$(XPI_NAME)-linux64.xpi: $(FILES)
+$(XPI_NAME)-linux64.xpi: $(FILES) tools/linux64
 	@$(call build-xpi,linux64, $^)
 
-$(XPI_NAME)-mac64.xpi: $(FILES)
+$(XPI_NAME)-mac64.xpi: $(FILES) tools/mac64
 	@$(call build-xpi,mac64, $^)
 
 clean:
 	rm -f *.xpi
-	rm -f update.rdf install.rdf bootstrap.js
+	rm -f update.rdf bootstrap.js
 
 define release
   echo "releasing $1"

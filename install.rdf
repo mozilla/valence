@@ -2,7 +2,7 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>fxdevtools-adapters@mozilla.org</em:id>
-    <em:version>@@ADDON_VERSION@@</em:version>
+    <em:version>0.0.1</em:version>
     <em:type>2</em:type>
     <em:bootstrap>true</em:bootstrap>
     <em:unpack>true</em:unpack>
@@ -21,7 +21,6 @@
     <em:description>Protocol Adapters for Firefox Developer Tools</em:description>
     <em:creator>Dave Camp</em:creator>
     <em:homepageURL>https://github.com/campd/fxdt-adapters</em:homepageURL>
-    <em:updateURL>@@UPDATE_URL@@</em:updateURL>
     <em:iconURL>icon.png</em:iconURL>
 
   </Description>
