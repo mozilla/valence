@@ -29,5 +29,11 @@
     "type": "bool",
     "value": false,
     "hidden": true
+  }, {
+    "name": "logMessageThreshold",
+    "title": "Maximum amount of chars to print in log messages, 0 means no limit",
+    "type": "integer",
+    "value": 0,
+    "hidden": true
   }]
 }
