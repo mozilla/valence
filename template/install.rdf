@@ -22,7 +22,6 @@
     <em:creator>Dave Camp</em:creator>
     <em:homepageURL>https://github.com/campd/fxdt-adapters</em:homepageURL>
     <em:updateURL>@@UPDATE_URL@@</em:updateURL>
-    <em:iconURL>icon.png</em:iconURL>
 
   </Description>
 </RDF>

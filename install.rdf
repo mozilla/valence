@@ -21,7 +21,6 @@
     <em:description>Protocol Adapters for Firefox Developer Tools</em:description>
     <em:creator>Dave Camp</em:creator>
     <em:homepageURL>https://github.com/campd/fxdt-adapters</em:homepageURL>
-    <em:iconURL>icon.png</em:iconURL>
 
   </Description>
 </RDF>
