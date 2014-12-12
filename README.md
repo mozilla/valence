@@ -60,7 +60,13 @@ Debugging Safari on iOS
 
 In addition to the installation instructions, you will need to enable developer support on your device. Follow the instructions on [this page](https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/GettingStarted/GettingStarted.html) (in the "To enable Web Inspector on iOS" section) to get started.  Note: you can also use the iOS simulator if you have Xcode installed.
 
-If you are on Linux, you will also need to install and run [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).  Run the debug bridge from the command line with `ios_webkit_debug_proxy`.
+Debugging Safari on iOS is possible through the use of the following open source libraries that come bundled with this extension:
+
+1. [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy) version 1.4 on both OS X and Linux
+2. [libimobiledevice](https://github.com/libimobiledevice/libimobiledevice) version 1.1.5 on OS X, 1.2.0pre on Linux
+3. [libplist](https://github.com/libimobiledevice/libplist) version 1.10 on OS X, 1.12pre on Linux
+4. [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd) version 1.0.8 on OS X,  1.0.0pre on Linux
+5. [usbmuxd](https://github.com/libimobiledevice/usbmuxd) version 1.1.1pre on Linux (bundled but not currently used)
 
 * Note: Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
 
