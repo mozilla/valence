@@ -26,7 +26,7 @@ bootstrap.js: template
 $(XPI_NAME)-win32.xpi: $(FILES)
 	@$(call build-xpi,win32, $^)
 
-$(XPI_NAME)-linux32.xpi: $(FILES)
+$(XPI_NAME)-linux32.xpi: $(FILES) tools/linux32
 	@$(call build-xpi,linux32, $^)
 
 $(XPI_NAME)-linux64.xpi: $(FILES) tools/linux64
