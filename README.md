@@ -67,7 +67,7 @@ Debugging Safari on iOS is possible through the use of the following open source
 3. [libplist](https://github.com/libimobiledevice/libplist) version 1.10 on OS X, 1.12pre on Linux
 4. [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd) version 1.0.8 on OS X, 1.0.0pre on Linux
 
-* Note: Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
+On Windows we are using the [ios-webkit-debug-proxy-win32](https://github.com/artygus/ios-webkit-debug-proxy-win32) port, at changeset d4a8a9a3f8afbb4e0a76a19126e7cd495dd84283. An additional runtime requirement on Windows is to have iTunes installed, or at least the Apple Mobile Device Support and Apple Application Support applications that come with it.
 
 Why did you start this project?
 -------------------------------
