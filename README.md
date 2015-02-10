@@ -1,5 +1,5 @@
-Firefox Developer Tools Adapter
-===============================
+Valence
+=======
 
 This add-on provides the ability for you to debug various remote targets from the Firefox Developer Tools. The idea is that you can use one solid set of developer tools to debug all the things you need. This is the dream, anyhow. We're going to try and make this happen.
 
@@ -22,7 +22,7 @@ Installation for All Y'all
 
 Before you can build and run the extension, here are a few things you'll need to do:
 
-1. `git clone git@github.com:campd/fxdt-adapters.git`
+1. `git clone git@github.com:campd/valence.git`
 
 2. Make sure you have an updated copy of Firefox Nightly installed. If you need to install Nightly, you can get it [here](https://nightly.mozilla.org/).
 
@@ -48,7 +48,7 @@ For example, on OSX, you could run the following command to start a debuggable c
 
     > /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')
 
-If you click on the toolbar button and nothing happens, you most likely don't have anything running on port 9222.  Check the [Browser Console](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console) to see what has gone wrong.
+If you click on the toolbar button and nothing happens, you most likely don't have anything running on port 9222.  Check the [Browser Console](https://developer.mozilla.org/docs/Tools/Browser_Console) to see what has gone wrong.
 
 Debugging Chrome on Android
 -----------------

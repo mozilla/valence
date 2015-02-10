@@ -1,9 +1,9 @@
 FILES=data lib package.json README.md bootstrap.js
-ADDON_NAME=fxdt-adapters
+ADDON_NAME=valence
 ADDON_VERSION=0.2.5pre
 XPI_NAME=$(ADDON_NAME)-$(ADDON_VERSION)
 
-FTP_ROOT_PATH=/pub/mozilla.org/labs/fxdt-adapters
+FTP_ROOT_PATH=/pub/mozilla.org/labs/valence
 
 UPDATE_LINK=https://ftp.mozilla.org$(FTP_ROOT_PATH)/
 UPDATE_URL=$(UPDATE_LINK)
