@@ -17,10 +17,10 @@
     </em:targetApplication>
 
     <!-- Front End MetaData -->
-    <em:name>Firefox Developer Tools Adapters</em:name>
+    <em:name>Valence</em:name>
     <em:description>Protocol Adapters for Firefox Developer Tools</em:description>
     <em:creator>Dave Camp</em:creator>
-    <em:homepageURL>https://github.com/campd/fxdt-adapters</em:homepageURL>
+    <em:homepageURL>https://github.com/campd/valence</em:homepageURL>
     <em:updateURL>@@UPDATE_URL@@</em:updateURL>
 
   </Description>
