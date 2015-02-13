@@ -23,7 +23,7 @@ endef
 bootstrap.js: template
 	cp template/bootstrap.js bootstrap.js
 
-$(XPI_NAME)-win32.xpi: $(FILES)
+$(XPI_NAME)-win32.xpi: $(FILES) tools/win32
 	@$(call build-xpi,win32, $^)
 
 $(XPI_NAME)-linux32.xpi: $(FILES) tools/linux32
