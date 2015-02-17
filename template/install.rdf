@@ -19,7 +19,7 @@
     <!-- Front End MetaData -->
     <em:name>Valence</em:name>
     <em:description>Protocol Adapters for Firefox Developer Tools</em:description>
-    <em:creator>Dave Camp</em:creator>
+    <em:creator>Mozilla</em:creator>
     <em:homepageURL>https://github.com/campd/valence</em:homepageURL>
     <em:updateURL>@@UPDATE_URL@@</em:updateURL>
 
