@@ -21,12 +21,6 @@ const scriptLoader = Cc['@mozilla.org/moz/jssubscript-loader;1'].
 const prefService = Cc['@mozilla.org/preferences-service;1'].
                     getService(Ci.nsIPrefService).
                     QueryInterface(Ci.nsIPrefBranch);
-const appInfo = Cc["@mozilla.org/xre/app-info;1"].
-                getService(Ci.nsIXULAppInfo);
-const ss = Cc['@mozilla.org/browser/sessionstartup;1'].
-           getService(Ci.nsISessionStartup)
-const vc = Cc["@mozilla.org/xpcom/version-comparator;1"].
-           getService(Ci.nsIVersionComparator);
 const { get, exists } = Cc['@mozilla.org/process/environment;1'].
                         getService(Ci.nsIEnvironment);
 
@@ -36,6 +30,9 @@ const prefSvc = Cc["@mozilla.org/preferences-service;1"].
 const { NetUtil } = Cu.import("resource://gre/modules/NetUtil.jsm", {});
 const { Promise: { defer } } = Cu.import("resource://gre/modules/Promise.jsm", {});
 const { Task: { spawn } } = Cu.import("resource://gre/modules/Task.jsm", {});
+// load below now, so that it can be used by sdk/addon/runner
+// see bug https://bugzilla.mozilla.org/show_bug.cgi?id=1042239
+const Startup = Cu.import("resource://gre/modules/sdk/system/Startup.js", {}).exports;
 
 const REASON = [ 'unknown', 'startup', 'shutdown', 'enable', 'disable',
                  'install', 'uninstall', 'upgrade', 'downgrade' ];
@@ -144,7 +141,7 @@ const readPaths = (options, id, name, domain, baseURI, isNative=false) => {
   let paths = {
     "": "resource://gre/modules/commonjs/",
     "./": isNative ? baseURI : baseURI + name + '/lib/',
-    "./tests/": isNative ? baseURI : baseURI + name + '/tests/'
+    "./tests/": (isNative ? baseURI : baseURI + name + '/') + 'tests/'
   };
 
   Object.keys(options.manifest || {}).reduce((paths, prefix) => {
@@ -204,8 +201,6 @@ const setPrefs = (root, options) =>
     void(0);
   });
 
-
-
 const startup = (addon, reasonCode) => {
   const reason = REASON[reasonCode];
   const { id, version, resourceURI: { spec: rootURI } } = addon;
@@ -213,7 +208,7 @@ const startup = (addon, reasonCode) => {
                         get("CFX_COMMAND") :
                         getPref("extensions." + id + ".sdk.load.command", undefined);
 
-  ss.onceInitialized.then(_ => spawn(function() {
+  spawn(function() {
     try {
       const config = readConfig(rootURI);
       const { metadata, options, isNative } = (yield config);
@@ -285,7 +280,8 @@ const startup = (addon, reasonCode) => {
         paths: paths,
         manifest: options.manifest || metadata,
         metadata: metadata,
-        modules: modules
+        modules: modules,
+        noQuit: getPref("extensions." + id + ".sdk.test.no-quit", false)
       });
 
       const module = loaderModule.Module(loaderID, loaderURI);
@@ -302,7 +298,7 @@ const startup = (addon, reasonCode) => {
       console.error("Failed to bootstrap addon: ", id, error);
       throw error;
     }
-  }));
+  });
 };
 
 const loadSandbox = (uri) => {
