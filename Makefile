@@ -1,4 +1,4 @@
-FILES=data lib package.json README.md bootstrap.js
+FILES=lib package.json README.md bootstrap.js
 ADDON_NAME=valence
 ADDON_VERSION=0.2.5pre
 XPI_NAME=$(ADDON_NAME)-$(ADDON_VERSION)
