@@ -46,6 +46,8 @@ define release
 	scp -p $(XPI_NAME)-$1.xpi $(SSH_USER)@stage.mozilla.org:$(FTP_ROOT_PATH)/$1/$(XPI_NAME)-$1.xpi
   # Update the "latest" symbolic link
 	ssh $(SSH_USER)@stage.mozilla.org 'cd $(FTP_ROOT_PATH)/$1/ && ln -fs $(XPI_NAME)-$1.xpi $(ADDON_NAME)-$1-latest.xpi'
+  # Update a "latest" symbolic link for compat with Fx 39 and earlier
+	ssh $(SSH_USER)@stage.mozilla.org 'cd $(FTP_ROOT_PATH)/$1/ && ln -fs $(XPI_NAME)-$1.xpi fxdt-adapters-$1-latest.xpi'
   # Update the update manifest
 	sed -e 's#@@UPDATE_LINK@@#$(UPDATE_LINK)$1/$(XPI_NAME)-$1.xpi#;s#@@ADDON_VERSION@@#$(ADDON_VERSION)#' template/update.rdf > update.rdf
   chmod 766 update.rdf
