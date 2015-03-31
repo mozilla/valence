@@ -2,6 +2,7 @@ FILES=data lib package.json README.md bootstrap.js
 ADDON_NAME=valence
 ADDON_VERSION=0.2.6pre
 XPI_NAME=$(ADDON_NAME)-$(ADDON_VERSION)
+SOURCE_ZIPFILE=$(ADDON_NAME)-sources.zip
 
 FTP_ROOT_PATH=/pub/mozilla.org/labs/valence
 
@@ -62,3 +63,13 @@ release: $(XPIS)
 	@$(call release,linux32)
 	@$(call release,linux64)
 	@$(call release,mac64)
+
+archive-sources:
+	@echo "archiving $1 sources"
+	@echo "(make sure you have run 'make distclean' in all dependencies!)"
+	rm ../$(SOURCE_ZIPFILE)
+	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) $(ADDON_NAME)
+	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) ios-webkit-debug-proxy
+	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) libimobiledevice
+	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) libplist
+	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) libusbmuxd
