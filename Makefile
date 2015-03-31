@@ -2,7 +2,7 @@ FILES=data lib package.json README.md bootstrap.js
 ADDON_NAME=valence
 ADDON_VERSION=0.2.6pre
 XPI_NAME=$(ADDON_NAME)-$(ADDON_VERSION)
-SOURCE_ZIPFILE=$(ADDON_NAME)-sources.zip
+SOURCE_ZIPFILE=$(XPI_NAME)-sources.zip
 
 FTP_ROOT_PATH=/pub/mozilla.org/labs/valence
 
@@ -53,23 +53,44 @@ define release
 	scp -p update.rdf $(SSH_USER)@stage.mozilla.org:$(FTP_ROOT_PATH)/$1/update.rdf
 endef
 
-release: $(XPIS)
+release: $(XPIS) archive-sources
 	@if [ -z $(SSH_USER) ]; then \
 	  echo "release target requires SSH_USER env variable to be defined."; \
 	  exit 1; \
 	fi
-	ssh $(SSH_USER)@stage.mozilla.org 'mkdir -m 755 -p $(FTP_ROOT_PATH)/{win32,linux32,linux64,mac64}'
+	ssh $(SSH_USER)@stage.mozilla.org 'mkdir -m 755 -p $(FTP_ROOT_PATH)/{win32,linux32,linux64,mac64,sources}'
 	@$(call release,win32)
 	@$(call release,linux32)
 	@$(call release,linux64)
 	@$(call release,mac64)
+	scp -p ../$(SOURCE_ZIPFILE) $(SSH_USER)@stage.mozilla.org:$(FTP_ROOT_PATH)/sources/$(SOURCE_ZIPFILE)
+  # Update the "latest sources" symbolic link
+	ssh $(SSH_USER)@stage.mozilla.org 'cd $(FTP_ROOT_PATH)/sources/ && ln -fs $(SOURCE_ZIPFILE) $(ADDON_NAME)-latest-sources.zip'
 
+# Expects to find the following directories in the same level as this one:
+#
+# ios-webkit-debug-proxy (https://github.com/google/ios-webkit-debug-proxy)
+# ios-webkit-debug-proxy-win32 (https://github.com/artygus/ios-webkit-debug-proxy-win32)
+# libimobiledevice (https://github.com/libimobiledevice/libimobiledevice)
+# libplist (https://github.com/libimobiledevice/libplist)
+# libusbmuxd (https://github.com/libimobiledevice/libusbmuxd)
+# openssl (https://github.com/openssl/openssl)
+# libxml2 (git://git.gnome.org/libxml2.git)
+# libiconv (git://git.savannah.gnu.org/libiconv.git)
+# pcre (svn://vcs.exim.org/pcre2/code/trunk)
+# zlib (http://zlib.net/)
 archive-sources:
 	@echo "archiving $1 sources"
 	@echo "(make sure you have run 'make distclean' in all dependencies!)"
-	rm ../$(SOURCE_ZIPFILE)
-	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) $(ADDON_NAME)
-	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) ios-webkit-debug-proxy
-	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) libimobiledevice
-	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) libplist
-	cd .. && zip -q -x \*.git\* -r $(SOURCE_ZIPFILE) libusbmuxd
+	rm -f ../$(SOURCE_ZIPFILE)
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) $(ADDON_NAME)
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) ios-webkit-debug-proxy
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) ios-webkit-debug-proxy-win32
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) libimobiledevice
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) libplist
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) libusbmuxd
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) openssl
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) libxml2
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) libiconv
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) pcre
+	cd .. && zip -qx \*.git\* -r $(SOURCE_ZIPFILE) zlib
