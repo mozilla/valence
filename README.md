@@ -34,6 +34,8 @@ Then from your extension folder you can use `jpm run -v`, with the`-b` option to
 
 Now that you've done that, you can follow the instructions below for each applicable debug target/browser.
 
+For more detailed building instructions and instructions for building the ios-webkit-debug-proxy binaries, see [building.html](data/building.html).
+
 
 Debugging Chrome on Desktop
 -----------------
@@ -67,7 +69,7 @@ Debugging Safari, Firefox, and other WebViews on iOS is possible through the use
 3. [libplist](https://github.com/libimobiledevice/libplist) version 1.10 on OS X, 1.12pre on Linux
 4. [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd) version 1.0.8 on OS X, 1.0.0pre on Linux
 
-On Windows (for now you need to build the XPI manually from the master branch) we are using the [ios-webkit-debug-proxy-win32](https://github.com/artygus/ios-webkit-debug-proxy-win32) port at changeset 52fb7e76c17e2b1a84987e252c4f81b50edc3754, until it gets merged back upstream. An additional runtime requirement on Windows is to have iTunes installed, or at least the Apple Mobile Device Support and Apple Application Support applications that come with it.
+On Windows we are using the [ios-webkit-debug-proxy-win32](https://github.com/artygus/ios-webkit-debug-proxy-win32) port at changeset 4318011f698e3b04c3e446d1c5dbe313c0d322b7, until it gets merged back upstream. An additional runtime requirement on Windows is to have iTunes installed, or at least the Apple Mobile Device Support and Apple Application Support applications that come with it.
 
 Why did you start this project?
 -------------------------------

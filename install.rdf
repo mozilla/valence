@@ -18,7 +18,12 @@
 
     <!-- Front End MetaData -->
     <em:name>Valence</em:name>
-    <em:description>Protocol Adapters for Firefox Developer Tools</em:description>
+    <em:description>Protocol Adapters for Firefox Developer Tools. User documentation is available on MDN: https://developer.mozilla.org/docs/Tools/Valence
+
+For licensing information please open the following page in a new tab:
+
+resource://fxdevtools-adapters-at-mozilla-dot-org/data/license.html
+    </em:description>
     <em:creator>Mozilla</em:creator>
     <em:homepageURL>https://github.com/campd/valence</em:homepageURL>
 
