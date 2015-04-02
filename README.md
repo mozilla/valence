@@ -34,6 +34,8 @@ Then from your extension folder you can use `jpm run -v`, with the`-b` option to
 
 Now that you've done that, you can follow the instructions below for each applicable debug target/browser.
 
+For more detailed building instructions and instructions for building the ios-webkit-debug-proxy binaries, see [building.html](data/building.html).
+
 
 Debugging Chrome on Desktop
 -----------------
