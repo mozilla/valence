@@ -1,5 +1,5 @@
 .git/
-doc/
+protocol-docs/
 old-test/
 template/
 .gitignore
