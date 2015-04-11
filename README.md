@@ -22,7 +22,7 @@ Installation for All Y'all
 
 Before you can build and run the extension, here are a few things you'll need to do:
 
-1. `git clone git@github.com:campd/valence.git`
+1. `git clone git@github.com:mozilla/valence.git`
 
 2. Make sure you have an updated copy of Firefox Nightly installed. If you need to install Nightly, you can get it [here](https://nightly.mozilla.org/).
 
