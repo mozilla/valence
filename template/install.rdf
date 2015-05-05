@@ -25,7 +25,7 @@ For licensing information please open the following page in a new tab:
 resource://fxdevtools-adapters-at-mozilla-dot-org/data/license.html
     </em:description>
     <em:creator>Mozilla</em:creator>
-    <em:homepageURL>https://github.com/campd/valence</em:homepageURL>
+    <em:homepageURL>https://github.com/mozilla/valence</em:homepageURL>
     <em:updateURL>@@UPDATE_URL@@</em:updateURL>
 
   </Description>
