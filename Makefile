@@ -51,7 +51,7 @@ define release
 	aws s3 cp $(S3_BASE_URL)$1/$(XPI_NAME)-$1.xpi $(S3_BASE_URL)$1/fxdt-adapters-$1-latest.xpi
   # Update the update manifest
 	sed -e 's#@@UPDATE_LINK@@#$(UPDATE_LINK)$1/$(XPI_NAME)-$1.xpi#;s#@@ADDON_VERSION@@#$(ADDON_VERSION)#' template/update.rdf > update.rdf
-	aws s3 cp update.rdf $(S3_BASE_URL)$1/update.rdf
+	aws s3 cp --cache-control max-age=3600 update.rdf $(S3_BASE_URL)$1/update.rdf
 endef
 
 release: $(XPIS) archive-sources
