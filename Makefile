@@ -4,10 +4,12 @@ ADDON_VERSION=0.3.2pre
 XPI_NAME=$(ADDON_NAME)-$(ADDON_VERSION)
 SOURCE_ZIPFILE=$(XPI_NAME)-sources.zip
 
-FTP_ROOT_PATH=/pub/mozilla.org/labs/valence
+REMOTE_ROOT_PATH=/pub/labs/valence/
 
-UPDATE_LINK=https://ftp.mozilla.org$(FTP_ROOT_PATH)/
+UPDATE_LINK=https://ftp.mozilla.org$(REMOTE_ROOT_PATH)
 UPDATE_URL=$(UPDATE_LINK)
+
+S3_BASE_URL=s3://net-mozaws-prod-delivery-contrib$(REMOTE_ROOT_PATH)
 
 XPIS = $(XPI_NAME)-win32.xpi $(XPI_NAME)-linux32.xpi $(XPI_NAME)-linux64.xpi $(XPI_NAME)-mac64.xpi
 
@@ -42,32 +44,24 @@ clean:
 
 define release
   echo "releasing $1"
-  # Copy the xpi
-  chmod 766 $(XPI_NAME)-$1.xpi
-	scp -p $(XPI_NAME)-$1.xpi $(SSH_USER)@stage.mozilla.org:$(FTP_ROOT_PATH)/$1/$(XPI_NAME)-$1.xpi
-  # Update the "latest" symbolic link
-	ssh $(SSH_USER)@stage.mozilla.org 'cd $(FTP_ROOT_PATH)/$1/ && ln -fs $(XPI_NAME)-$1.xpi $(ADDON_NAME)-$1-latest.xpi'
-  # Update a "latest" symbolic link for compat with Fx 39 and earlier
-	ssh $(SSH_USER)@stage.mozilla.org 'cd $(FTP_ROOT_PATH)/$1/ && ln -fs $(XPI_NAME)-$1.xpi fxdt-adapters-$1-latest.xpi'
+	aws s3 cp $(XPI_NAME)-$1.xpi $(S3_BASE_URL)$1/$(XPI_NAME)-$1.xpi
+  # Update the "latest" symbolic link with a copy inside s3
+	aws s3 cp $(S3_BASE_URL)$1/$(XPI_NAME)-$1.xpi $(S3_BASE_URL)$1/$(ADDON_NAME)-$1-latest.xpi
+  # Update a "latest" symbolic link with a copy inside s3 for compat with Fx 39 and earlier
+	aws s3 cp $(S3_BASE_URL)$1/$(XPI_NAME)-$1.xpi $(S3_BASE_URL)$1/fxdt-adapters-$1-latest.xpi
   # Update the update manifest
 	sed -e 's#@@UPDATE_LINK@@#$(UPDATE_LINK)$1/$(XPI_NAME)-$1.xpi#;s#@@ADDON_VERSION@@#$(ADDON_VERSION)#' template/update.rdf > update.rdf
-  chmod 766 update.rdf
-	scp -p update.rdf $(SSH_USER)@stage.mozilla.org:$(FTP_ROOT_PATH)/$1/update.rdf
+	aws s3 cp update.rdf $(S3_BASE_URL)$1/update.rdf
 endef
 
 release: $(XPIS) archive-sources
-	@if [ -z $(SSH_USER) ]; then \
-	  echo "release target requires SSH_USER env variable to be defined."; \
-	  exit 1; \
-	fi
-	ssh $(SSH_USER)@stage.mozilla.org 'mkdir -m 755 -p $(FTP_ROOT_PATH)/{win32,linux32,linux64,mac64,sources}'
 	@$(call release,win32)
 	@$(call release,linux32)
 	@$(call release,linux64)
 	@$(call release,mac64)
-	scp -p ../$(SOURCE_ZIPFILE) $(SSH_USER)@stage.mozilla.org:$(FTP_ROOT_PATH)/sources/$(SOURCE_ZIPFILE)
-  # Update the "latest sources" symbolic link
-	ssh $(SSH_USER)@stage.mozilla.org 'cd $(FTP_ROOT_PATH)/sources/ && ln -fs $(SOURCE_ZIPFILE) $(ADDON_NAME)-latest-sources.zip'
+	aws s3 cp ../$(SOURCE_ZIPFILE) $(S3_BASE_URL)sources/$(SOURCE_ZIPFILE)
+	# Update latest with a copy inside s3
+	aws s3 cp $(S3_BASE_URL)sources/$(SOURCE_ZIPFILE) $(S3_BASE_URL)sources/$(ADDON_NAME)-latest-sources.zip
 
 # Expects to find the following directories in the same level as this one:
 #
