@@ -1,9 +1,9 @@
 Valence
 =======
 
-This add-on provides the ability for you to debug various remote targets from the Firefox Developer Tools. The idea is that you can use one solid set of developer tools to debug all the things you need. This is the dream, anyhow. We're going to try and make this happen.
+Valence is a Firefox add-on that is installed by default with Firefox Developer Edition. It is a remote debugging protocol adapter that allows you to debug chrome and safari ( desktop and mobile ) from Firefox, using WebIDE.
 
-This module sort of works, but it probably won't do all the things you need to do as a web developer - yet.  You're curious though, so here is some basic information to get started.  Curiosity is good, it is how we move forward as a people.
+Documentation on how to use WebIDE and Valence is available on the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Tools/Valence).
 
 How to Interact With The Thing
 ------------------------------
