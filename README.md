@@ -1,7 +1,7 @@
 Valence
 =======
 
-Valence is a Firefox add-on that is installed by default with Firefox Developer Edition. It is a remote debugging protocol adapter that allows you to debug chrome and safari ( desktop and mobile ) from Firefox, using WebIDE.
+Valence is a Firefox add-on that is installed by default with Firefox Developer Edition. It is a remote debugging protocol adapter that allows you to debug Chrome and Safari (desktop and mobile) from Firefox, using WebIDE.
 
 Documentation on how to use WebIDE and Valence is available on the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Tools/Valence).
 
