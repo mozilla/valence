@@ -1,6 +1,6 @@
 FILES=data lib package.json README.md bootstrap.js
 ADDON_NAME=valence
-ADDON_VERSION=0.3.4pre
+ADDON_VERSION=0.3.5pre
 XPI_NAME=$(ADDON_NAME)-$(ADDON_VERSION)
 SOURCE_ZIPFILE=$(XPI_NAME)-sources.zip
 
