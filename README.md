@@ -1,5 +1,5 @@
-Firefox Developer Tools Adapter
-===============================
+Valence
+=======
 
 This add-on provides the ability for you to debug various remote targets from the Firefox Developer Tools. The idea is that you can use one solid set of developer tools to debug all the things you need. This is the dream, anyhow. We're going to try and make this happen.
 
@@ -22,7 +22,7 @@ Installation for All Y'all
 
 Before you can build and run the extension, here are a few things you'll need to do:
 
-1. `git clone git@github.com:campd/fxdt-adapters.git`
+1. `git clone git@github.com:mozilla/valence.git`
 
 2. Make sure you have an updated copy of Firefox Nightly installed. If you need to install Nightly, you can get it [here](https://nightly.mozilla.org/).
 
@@ -33,6 +33,8 @@ Before you can build and run the extension, here are a few things you'll need to
 Then from your extension folder you can use `jpm run -v`, with the`-b` option to use your recent Firefox Nightly, to run a new Firefox process with the extension installed.
 
 Now that you've done that, you can follow the instructions below for each applicable debug target/browser.
+
+For more detailed building instructions and instructions for building the ios-webkit-debug-proxy binaries, see [building.html](data/building.html).
 
 
 Debugging Chrome on Desktop
@@ -48,21 +50,26 @@ For example, on OSX, you could run the following command to start a debuggable c
 
     > /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')
 
-If you click on the toolbar button and nothing happens, you most likely don't have anything running on port 9222.  Check the [Browser Console](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console) to see what has gone wrong.
+If you click on the toolbar button and nothing happens, you most likely don't have anything running on port 9222.  Check the [Browser Console](https://developer.mozilla.org/docs/Tools/Browser_Console) to see what has gone wrong.
 
 Debugging Chrome on Android
 -----------------
 
 In addition to the installation instructions, follow [these instructions](https://developer.chrome.com/devtools/docs/remote-debugging-legacy) to turn on remote debugging and set up adb.
 
-Debugging Safari on iOS
+Debugging Safari, Firefox, and other WebViews on iOS
 -------------
 
 In addition to the installation instructions, you will need to enable developer support on your device. Follow the instructions on [this page](https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/GettingStarted/GettingStarted.html) (in the "To enable Web Inspector on iOS" section) to get started.  Note: you can also use the iOS simulator if you have Xcode installed.
 
-If you are on Linux, you will also need to install and run [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy).  Run the debug bridge from the command line with `ios_webkit_debug_proxy`.
+Debugging Safari, Firefox, and other WebViews on iOS is possible through the use of the following open source libraries that come bundled with this extension:
 
-* Note: Even more broken than Chrome on Android, but whatever, we're going to roll with it and soon enough it will not be broken.
+1. [ios_webkit_debug_proxy](https://github.com/google/ios-webkit-debug-proxy) version 1.4 on both OS X and Linux
+2. [libimobiledevice](https://github.com/libimobiledevice/libimobiledevice) version 1.1.5 on OS X, 1.2.0pre on Linux
+3. [libplist](https://github.com/libimobiledevice/libplist) version 1.10 on OS X, 1.12pre on Linux
+4. [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd) version 1.0.8 on OS X, 1.0.0pre on Linux
+
+On Windows we are using the [ios-webkit-debug-proxy-win32](https://github.com/artygus/ios-webkit-debug-proxy-win32) port at changeset 4318011f698e3b04c3e446d1c5dbe313c0d322b7, until it gets merged back upstream. An additional runtime requirement on Windows is to have iTunes installed, or at least the Apple Mobile Device Support and Apple Application Support applications that come with it.
 
 Why did you start this project?
 -------------------------------

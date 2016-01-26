@@ -1,12 +1,12 @@
 {
-  "name": "fxdevtools_adapters",
-  "title": "Firefox Developer Tools Adapters",
+  "name": "valence",
+  "title": "Valence",
   "id": "fxdevtools-adapters@mozilla.org",
   "description": "Protocol Adapters for Firefox Developer Tools",
   "author": "Dave Camp",
   "repository": {
     "type": "git",
-    "url": "https://github.com/campd/fxdt-adapters"
+    "url": "https://github.com/mozilla/valence"
   },
   "license": "MPL 2.0",
   "version": "0.0.1",
@@ -20,12 +20,6 @@
   }, {
     "name": "logDevToolsProtocolTraffic",
     "title": "Log the protocol traffic to and from the toolbox",
-    "type": "bool",
-    "value": false,
-    "hidden": true
-  }, {
-    "name": "enableToolbarButton",
-    "title": "Show a button in the toolbar that connects to localhost:9222",
     "type": "bool",
     "value": false,
     "hidden": true
