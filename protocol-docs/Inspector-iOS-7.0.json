@@ -65,26 +65,25 @@
                 ]
             },
             {
+                "id": "FrameResource",
+                "type": "object",
+                "properties": [
+                    { "name": "url", "type": "string", "description": "Resource URL." },
+                    { "name": "type", "$ref": "ResourceType", "description": "Type of this resource." },
+                    { "name": "mimeType", "type": "string", "description": "Resource mimeType as determined by the browser." },
+                    { "name": "failed", "type": "boolean", "optional": true, "description": "True if the resource failed to load." },
+                    { "name": "canceled", "type": "boolean", "optional": true, "description": "True if the resource was canceled during loading." },
+                    { "name": "sourceMapURL", "type": "string", "optional": true, "description": "URL of source map associated with this resource (if any)." }
+                ]
+            },
+            {
                 "id": "FrameResourceTree",
                 "type": "object",
                 "description": "Information about the Frame hierarchy along with their cached resources.",
                 "properties": [
                     { "name": "frame", "$ref": "Frame", "description": "Frame information for this tree item." },
                     { "name": "childFrames", "type": "array", "optional": true, "items": { "$ref": "FrameResourceTree" }, "description": "Child frames." },
-                    { "name": "resources", "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": [
-                                { "name": "url", "type": "string", "description": "Resource URL." },
-                                { "name": "type", "$ref": "ResourceType", "description": "Type of this resource." },
-                                { "name": "mimeType", "type": "string", "description": "Resource mimeType as determined by the browser." },
-                                { "name": "failed", "type": "boolean", "optional": true, "description": "True if the resource failed to load." },
-                                { "name": "canceled", "type": "boolean", "optional": true, "description": "True if the resource was canceled during loading." },
-                                { "name": "sourceMapURL", "type": "string", "optional": true, "description": "URL of source map associated with this resource (if any)." }
-                            ]
-                        },
-                        "description": "Information about frame resources."
-                    }
+                    { "name": "resources", "type": "array", "items": { "$ref": "FrameResource" }, "description": "Information about frame resources." }
                 ]
             },
             {
@@ -235,55 +234,6 @@
                 "parameters": [
                     { "name": "frameId", "$ref": "Network.FrameId", "description": "Frame id to set HTML for." },
                     { "name": "html", "type": "string", "description": "HTML content to set."  }
-                ]
-            },
-            {
-                "name": "setShowPaintRects",
-                "description": "Requests that backend shows paint rectangles",
-                "parameters": [
-                    { "name": "result", "type": "boolean", "description": "True for showing paint rectangles" }
-                ]
-            },
-            {
-                "name": "canShowDebugBorders",
-                "description": "Tells if backend supports debug borders on layers",
-                "returns": [
-                    { "name": "show", "type": "boolean", "description": "True if the debug borders can be shown" }
-                ]
-            },
-            {
-                "name": "setShowDebugBorders",
-                "description": "Requests that backend shows debug borders on layers",
-                "parameters": [
-                    { "name": "show", "type": "boolean", "description": "True for showing debug borders" }
-                ]
-            },
-            {
-                "name": "canShowFPSCounter",
-                "description": "Tells if backend supports a FPS counter display",
-                "returns": [
-                    { "name": "show", "type": "boolean", "description": "True if the FPS count can be shown" }
-                ]
-            },
-            {
-                "name": "setShowFPSCounter",
-                "description": "Requests that backend shows the FPS counter",
-                "parameters": [
-                    { "name": "show", "type": "boolean", "description": "True for showing the FPS counter" }
-                ]
-            },
-            {
-                "name": "canContinuouslyPaint",
-                "description": "Tells if backend supports continuous painting",
-                "returns": [
-                    { "name": "value", "type": "boolean", "description": "True if continuous painting is available" }
-                ]
-            },
-            {
-                "name": "setContinuousPaintingEnabled",
-                "description": "Requests that backend enables continuous painting",
-                "parameters": [
-                    { "name": "enabled", "type": "boolean", "description": "True for enabling cointinuous painting" }
                 ]
             },
             {
@@ -596,10 +546,6 @@
                 "description": "Releases all remote objects that belong to a given group."
             },
             {
-                "name": "run",
-                "description": "Tells inspected instance(worker or page) that it can run in case it was started paused."
-            },
-            {
                 "name": "enable",
                 "description": "Enables reporting of execution contexts creation by means of <code>executionContextCreated</code> event. When the reporting gets enabled the event will be sent immediately for each existing execution context."
             },
@@ -863,35 +809,6 @@
                     { "name": "body", "type": "string", "description": "Response body." },
                     { "name": "base64Encoded", "type": "boolean", "description": "True, if content was sent as base64." }
                 ]
-            },
-            {
-                "name": "replayXHR",
-                "description": "This method sends a new XMLHttpRequest which is identical to the original one. The following parameters should be identical: method, url, async, request body, extra headers, withCredentials attribute, user, password.",
-                "parameters": [
-                    { "name": "requestId", "$ref": "RequestId", "description": "Identifier of XHR to replay." }
-                ]
-            },
-            {
-                "name": "canClearBrowserCache",
-                "description": "Tells whether clearing browser cache is supported.",
-                "returns": [
-                    { "name": "result", "type": "boolean", "description": "True if browser cache can be cleared." }
-                ]
-            },
-            {
-                "name": "clearBrowserCache",
-                "description": "Clears browser cache."
-            },
-            {
-                "name": "canClearBrowserCookies",
-                "description": "Tells whether clearing browser cookies is supported.",
-                "returns": [
-                    { "name": "result", "type": "boolean", "description": "True if browser cookies can be cleared." }
-                ]
-            },
-            {
-                "name": "clearBrowserCookies",
-                "description": "Clears browser cookies."
             },
             {
                 "name": "setCacheDisabled",
@@ -1341,7 +1258,7 @@
                 "description": "DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes. DOMNode is a base node mirror type."
             },
             {
-                "id": "RGBA",
+                "id": "RGBAColor",
                 "type": "object",
                 "properties": [
                     { "name": "r", "type": "integer", "description": "The red component, in the [0-255] range." },
@@ -1364,10 +1281,10 @@
                 "type": "object",
                 "properties": [
                     { "name": "showInfo", "type": "boolean", "optional": true, "description": "Whether the node info tooltip should be shown (default: false)." },
-                    { "name": "contentColor", "$ref": "RGBA", "optional": true, "description": "The content box highlight fill color (default: transparent)." },
-                    { "name": "paddingColor", "$ref": "RGBA", "optional": true, "description": "The padding highlight fill color (default: transparent)." },
-                    { "name": "borderColor", "$ref": "RGBA", "optional": true, "description": "The border highlight fill color (default: transparent)." },
-                    { "name": "marginColor", "$ref": "RGBA", "optional": true, "description": "The margin highlight fill color (default: transparent)." }
+                    { "name": "contentColor", "$ref": "RGBAColor", "optional": true, "description": "The content box highlight fill color (default: transparent)." },
+                    { "name": "paddingColor", "$ref": "RGBAColor", "optional": true, "description": "The padding highlight fill color (default: transparent)." },
+                    { "name": "borderColor", "$ref": "RGBAColor", "optional": true, "description": "The border highlight fill color (default: transparent)." },
+                    { "name": "marginColor", "$ref": "RGBAColor", "optional": true, "description": "The margin highlight fill color (default: transparent)." }
                 ],
                 "description": "Configuration data for the highlighting of page elements."
             }
@@ -1546,8 +1463,8 @@
                     { "name": "y", "type": "integer", "description": "Y coordinate" },
                     { "name": "width", "type": "integer", "description": "Rectangle width" },
                     { "name": "height", "type": "integer", "description": "Rectangle height" },
-                    { "name": "color", "$ref": "RGBA", "optional": true, "description": "The highlight fill color (default: transparent)." },
-                    { "name": "outlineColor", "$ref": "RGBA", "optional": true, "description": "The highlight outline color (default: transparent)." },
+                    { "name": "color", "$ref": "RGBAColor", "optional": true, "description": "The highlight fill color (default: transparent)." },
+                    { "name": "outlineColor", "$ref": "RGBAColor", "optional": true, "description": "The highlight outline color (default: transparent)." },
                     { "name": "usePageCoordinates", "type": "boolean", "optional": true, "description": "Indicates whether the provided parameters are in page coordinates or in viewport coordinates (the default)." }
                 ],
                 "description": "Highlights given rectangle. Coordinates are absolute with respect to the main frame viewport."
@@ -1556,8 +1473,8 @@
                 "name": "highlightQuad",
                 "parameters": [
                     { "name": "quad", "$ref": "Quad", "description": "Quad to highlight" },
-                    { "name": "color", "$ref": "RGBA", "optional": true, "description": "The highlight fill color (default: transparent)." },
-                    { "name": "outlineColor", "$ref": "RGBA", "optional": true, "description": "The highlight outline color (default: transparent)." },
+                    { "name": "color", "$ref": "RGBAColor", "optional": true, "description": "The highlight fill color (default: transparent)." },
+                    { "name": "outlineColor", "$ref": "RGBAColor", "optional": true, "description": "The highlight outline color (default: transparent)." },
                     { "name": "usePageCoordinates", "type": "boolean", "optional": true, "description": "Indicates whether the provided parameters are in page coordinates or in viewport coordinates (the default)." }
                 ],
                 "description": "Highlights given quad. Coordinates are absolute with respect to the main frame viewport."
@@ -1579,8 +1496,8 @@
                 "name": "highlightFrame",
                 "parameters": [
                     { "name": "frameId", "$ref": "Network.FrameId", "description": "Identifier of the frame to highlight." },
-                    { "name": "contentColor", "$ref": "RGBA", "optional": true, "description": "The content box highlight fill color (default: transparent)." },
-                    { "name": "contentOutlineColor", "$ref": "RGBA", "optional": true, "description": "The content box highlight outline color (default: transparent)." }
+                    { "name": "contentColor", "$ref": "RGBAColor", "optional": true, "description": "The content box highlight fill color (default: transparent)." },
+                    { "name": "contentOutlineColor", "$ref": "RGBAColor", "optional": true, "description": "The content box highlight outline color (default: transparent)." }
                 ],
                 "description": "Highlights owner element of the frame with given id."
             },
@@ -1917,6 +1834,12 @@
                 "description": "CSS style representation."
             },
             {
+                "id": "CSSPropertyStatus",
+                "type": "string",
+                "enum": ["active", "inactive", "disabled", "style"],
+                "description": "The property status: \"active\" (implied if absent) if the property is effective in the style, \"inactive\" if the property is overridden by a same-named property in this style later on, \"disabled\" if the property is disabled by the user, \"style\" if the property is reported by the browser rather than by the CSS source parser."
+            },
+            {
                 "id": "CSSProperty",
                 "type": "object",
                 "properties": [
@@ -1926,7 +1849,7 @@
                     { "name": "implicit", "type": "boolean", "optional": true, "description": "Whether the property is implicit (implies <code>false</code> if absent)." },
                     { "name": "text", "type": "string", "optional": true, "description": "The full property text as specified in the style." },
                     { "name": "parsedOk", "type": "boolean", "optional": true, "description": "Whether the property is understood by the browser (implies <code>true</code> if absent)." },
-                    { "name": "status", "type": "string", "enum": ["active", "inactive", "disabled", "style"], "optional": true, "description": "The property status: \"active\" if the property is effective in the style, \"inactive\" if the property is overridden by a same-named property in this style later on, \"disabled\" if the property is disabled by the user, \"style\" (implied if absent) if the property is reported by the browser rather than by the CSS source parser." },
+                    { "name": "status", "$ref": "CSSPropertyStatus", "optional": true, "description": "Whether the property is active or disabled." },
                     { "name": "range", "$ref": "SourceRange", "optional": true, "description": "The entire property range in the enclosing style declaration (if available)." }
                 ],
                 "description": "CSS style effective visual dimensions and source offsets."
@@ -2076,31 +1999,6 @@
                 "description": "Sets the new <code>text</code> for the respective style."
             },
             {
-                "name": "setPropertyText",
-                "parameters": [
-                    { "name": "styleId", "$ref": "CSSStyleId" },
-                    { "name": "propertyIndex", "type": "integer" },
-                    { "name": "text", "type": "string" },
-                    { "name": "overwrite", "type": "boolean" }
-                ],
-                "returns": [
-                    { "name": "style", "$ref": "CSSStyle", "description": "The resulting style after the property text modification." }
-                ],
-                "description": "Sets the new <code>text</code> for a property in the respective style, at offset <code>propertyIndex</code>. If <code>overwrite</code> is <code>true</code>, a property at the given offset is overwritten, otherwise inserted. <code>text</code> entirely replaces the property <code>name: value</code>."
-            },
-            {
-                "name": "toggleProperty",
-                "parameters": [
-                    { "name": "styleId", "$ref": "CSSStyleId" },
-                    { "name": "propertyIndex", "type": "integer" },
-                    { "name": "disable", "type": "boolean" }
-                ],
-                "returns": [
-                    { "name": "style", "$ref": "CSSStyle", "description": "The resulting style after the property toggling." }
-                ],
-                "description": "Toggles the property in the respective style, at offset <code>propertyIndex</code>. The <code>disable</code> parameter denotes whether the property should be disabled (i.e. removed from the style declaration). If <code>disable == false</code>, the property gets put back into its original place in the style declaration."
-            },
-            {
                 "name": "setRuleSelector",
                 "parameters": [
                     { "name": "ruleId", "$ref": "CSSRuleId" },
@@ -2200,7 +2098,7 @@
             {
                 "id": "EventType",
                 "type": "string",
-                "enum": ["EventDispatch", "ScheduleStyleRecalculation", "RecalculateStyles", "InvalidateLayout", "Layout", "Paint", "ScrollLayer", "ResizeImage", "ParseHTML", "TimerInstall", "TimerRemove", "TimerFire", "EvaluateScript", "MarkLoad", "MarkDOMContent", "TimeStamp", "Time", "TimeEnd", "ScheduleResourceRequest", "ResourceSendRequest", "ResourceReceiveResponse", "ResourceReceivedData", "ResourceFinish", "XHRReadyStateChange", "XHRLoad", "FunctionCall", "GCEvent", "RequestAnimationFrame", "CancelAnimationFrame", "FireAnimationFrame", "WebSocketCreate", "WebSocketSendHandshakeRequest", "WebSocketReceiveHandshakeResponse", "WebSocketDestroy"],
+                "enum": ["EventDispatch", "ScheduleStyleRecalculation", "RecalculateStyles", "InvalidateLayout", "Layout", "Paint", "ResizeImage", "ParseHTML", "TimerInstall", "TimerRemove", "TimerFire", "EvaluateScript", "MarkLoad", "MarkDOMContent", "TimeStamp", "Time", "TimeEnd", "ScheduleResourceRequest", "ResourceSendRequest", "ResourceReceiveResponse", "ResourceReceivedData", "ResourceFinish", "XHRReadyStateChange", "XHRLoad", "FunctionCall", "RequestAnimationFrame", "CancelAnimationFrame", "FireAnimationFrame", "WebSocketCreate", "WebSocketSendHandshakeRequest", "WebSocketReceiveHandshakeResponse", "WebSocketDestroy"],
                 "description": "Timeline record type."
             },
             {
@@ -2683,76 +2581,6 @@
             },
             {
                 "name": "resetProfiles"
-            }
-        ]
-    },
-    {
-        "domain": "Worker",
-        "types": [],
-        "commands": [
-            {
-                "name": "enable"
-            },
-            {
-                "name": "disable"
-            },
-            {
-                "name": "sendMessageToWorker",
-                "parameters": [
-                    { "name": "workerId", "type": "integer" },
-                    { "name": "message", "type": "object" }
-                ]
-            },
-            {
-                "name": "canInspectWorkers",
-                "description": "Tells whether browser supports workers inspection.",
-                "returns": [
-                    { "name": "result", "type": "boolean", "description": "True if browser has workers support." }
-                ]
-            },
-            {
-                "name": "connectToWorker",
-                "parameters": [
-                    { "name": "workerId", "type": "integer" }
-                ]
-            },
-            {
-                "name": "disconnectFromWorker",
-                "parameters": [
-                    { "name": "workerId", "type": "integer" }
-                ]
-            },
-            {
-                "name": "setAutoconnectToWorkers",
-                "parameters": [
-                    { "name": "value", "type": "boolean" }
-                ]
-            }
-        ],
-        "events": [
-            {
-                "name": "workerCreated",
-                "parameters": [
-                    { "name": "workerId", "type": "integer" },
-                    { "name": "url", "type": "string" },
-                    { "name": "inspectorConnected", "type": "boolean" }
-                ]
-            },
-            {
-                "name": "workerTerminated",
-                "parameters": [
-                    { "name": "workerId", "type": "integer" }
-                ]
-            },
-            {
-                "name": "dispatchMessageFromWorker",
-                "parameters": [
-                    { "name": "workerId", "type": "integer" },
-                    { "name": "message", "type": "object" }
-                ]
-            },
-            {
-                "name": "disconnectedFromWorker"
             }
         ]
     },
