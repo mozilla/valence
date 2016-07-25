@@ -69,7 +69,7 @@ Debugging Safari, Firefox, and other WebViews on iOS is possible through the use
 3. [libplist](https://github.com/libimobiledevice/libplist) version 1.10 on OS X, 1.12pre on Linux
 4. [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd) version 1.0.8 on OS X, 1.0.0pre on Linux
 
-On Windows we are using the [ios-webkit-debug-proxy-win32](https://github.com/artygus/ios-webkit-debug-proxy-win32) port at changeset 4318011f698e3b04c3e446d1c5dbe313c0d322b7, until it gets merged back upstream. An additional runtime requirement on Windows is to have iTunes installed, or at least the Apple Mobile Device Support and Apple Application Support applications that come with it.
+On Windows we are using the [ios-webkit-debug-proxy](https://github.com/google/ios-webkit-debug-proxy) port at commit 20679aaa990b82e7fb43e434e271cce17e327f90. An additional runtime requirement on Windows is to have iTunes installed, or at least the Apple Mobile Device Support and Apple Application Support applications that come with it.
 
 Why did you start this project?
 -------------------------------
