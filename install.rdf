@@ -6,6 +6,7 @@
     <em:type>2</em:type>
     <em:bootstrap>true</em:bootstrap>
     <em:unpack>true</em:unpack>
+    <em:multiprocessCompatible>true</em:multiprocessCompatible>
 
     <!-- Firefox -->
     <em:targetApplication>
