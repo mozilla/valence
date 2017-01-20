@@ -17,6 +17,15 @@
       </Description>
     </em:targetApplication>
 
+    <!-- SeaMonkey -->
+    <em:targetApplication>
+      <em:Description>
+        <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
+        <em:minVersion>2.45</em:minVersion>
+        <em:maxVersion>*</em:maxVersion>
+      </em:Description>
+    </em:targetApplication>
+
     <!-- Front End MetaData -->
     <em:name>Valence</em:name>
     <em:description>Protocol Adapters for Firefox Developer Tools. User documentation is available on MDN: https://developer.mozilla.org/docs/Tools/Valence
