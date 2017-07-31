@@ -43,6 +43,7 @@ clean:
 	rm -f update.rdf bootstrap.js
 
 define release
+  ./sign.sh $(XPI_NAME)-$1.xpi
   echo "releasing $1"
 	aws s3 cp $(XPI_NAME)-$1.xpi $(S3_BASE_URL)$1/$(XPI_NAME)-$1.xpi
   # Update the "latest" symbolic link with a copy inside s3
