@@ -1,3 +1,10 @@
+This project is no longer maintained
+====================================
+
+Mozilla no longer maintains this project.  Cross-browser remote debugging is still a priority.  To enable browser/device agnostic inspection and debugging, we intend to make our tools be directly compatible with the Chrome DevTools Protocol.
+
+---
+
 Valence
 =======
 
